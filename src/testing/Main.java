@@ -13,10 +13,11 @@ public class Main {
 		int width = 800;
 		int height = 600;
 		int scale = 3;
-		double nsPerTick = 1e9D / 100D;
+		double nsPerTick = 1e9D / 1000D;
 		double nsPerRender = 1e9D / 60D;
+		int pl=1000;
 		AntMoveFrame antMoveFrame = new AntMoveFrame(width, height, scale,  nsPerTick,
-				nsPerRender);
+				nsPerRender,pl);
 		antMoveFrame.start();
 		// cs.stop();
 		System.out.println("main end");
