@@ -25,47 +25,71 @@ public class AntMoveFrame extends CanvasShell {
 		if (ants.size() >= pl)
 			ants.remove(0);
 	}
+
 	private void addant(int I) {
-		for (int i = 0; i < I; i++)
-			{Ant ant=new Ant(new Vector2D((Utils.random.nextFloat() * 2 - 1) * cx,
+		for (int i = 0; i < I; i++) {
+			Ant ant = new Ant(new Vector2D((Utils.random.nextFloat() * 2 - 1) * cx,
 					(Utils.random.nextFloat() * 2 - 1) * cy));
-			ant.color=Utils.random.nextInt(Colors.get(1, 1, 1));
-			ants.add(ant);}
+			ant.setRandomColor();
+			ant.findDestByColor();
+			ants.add(ant);
+		}
 	}
 
 	@Override
 	protected void init() {
 		ants = new ArrayList<Ant>();
-		addant(1);
-		lastMouseMove=new Vector2D(cx,cy);
+		addant(pl);
+		// addant(1);
+		lastMouseMove = new Vector2D(cx, cy);
 	}
 
 	@Override
 	protected void myTick() {
-		checkant();
-		/*if (!((mouseHandler.mouseMoved.locationRelativeAbsolute.x==lastMouseMove.x)&&(mouseHandler.mouseMoved.locationRelativeAbsolute.y==lastMouseMove.y))){
-			lastMouseMove=mouseHandler.mouseMoved.locationRelativeAbsolute.clone();
-			ants.add(new Ant(lastMouseMove.clone()));
-		}*/
-		addant(1);
+		/*
+		 * if
+		 * (!((mouseHandler.mouseMoved.locationRelativeAbsolute.x==lastMouseMove
+		 * .
+		 * x)&&(mouseHandler.mouseMoved.locationRelativeAbsolute.y==lastMouseMove
+		 * .y))){
+		 * lastMouseMove=mouseHandler.mouseMoved.locationRelativeAbsolute.
+		 * clone(); ants.add(new Ant(lastMouseMove.clone())); }
+		 */
+		/*
+		 * checkant(); addant(1);
+		 */
+		// int index=Utils.random.nextInt(ants.size());
+		// ants.get(index).setRandomColor();
+		// ants.get(index).findDestByColor();
 		// ants.get(0).findDest(ants.get(ants.size()-1));
 		/*
 		 * ants.get(0).dest.x = mouseHandler.mouseMoved.x / SCALE - cx;
 		 * ants.get(0).dest.y = mouseHandler.mouseMoved.y / SCALE - cy;
 		 */
-		ants.get(0).findDest(ants.get(ants.size()-1));
-		for (int i = 1; i < ants.size(); i++)
-			ants.get(i).findDest(ants.get(i - 1));
+		/*
+		 * ants.get(0).findDest(ants.get(ants.size()-1)); for (int i = 1; i <
+		 * ants.size(); i++) ants.get(i).findDest(ants.get(i - 1));
+		 */
 		for (Ant ant : ants) {
 			ant.move();
 		}
 	}
 
-	
+	private void printBG() {
+		int r, g, b;
+		for (int y = (int) -cy; y < (int) cy; y++)
+			for (int x = (int) -cx; x < (int) cx; x++) {
+				r = x;
+				g = y;
+				b = x + y;
+				screen.add(x, y, Colors.get(r, g, b));
+			}
+	}
 
 	@Override
 	protected void myRender() {
 		screen.clear(Colors.get(0, 0, 0));
+		// printBG();
 		for (Ant ant : ants) {
 			screen.add(ant.location, ant.color);
 		}

@@ -15,7 +15,7 @@ public class Main {
 		int scale = 3;
 		double nsPerTick = 1e9D / 100D;
 		double nsPerRender = 1e9D / 60D;
-		int pl=1000;
+		int pl=width*height/scale/10;
 		AntMoveFrame antMoveFrame = new AntMoveFrame(width, height, scale,  nsPerTick,
 				nsPerRender,pl);
 		antMoveFrame.start();
