@@ -21,24 +21,33 @@ public class AntMoveFrame extends CanvasShell {
 		this.pl = pl;
 	}
 
+	private void checkant() {
+		if (ants.size() >= pl)
+			ants.remove(0);
+	}
+	private void addant(int I) {
+		for (int i = 0; i < I; i++)
+			{Ant ant=new Ant(new Vector2D((Utils.random.nextFloat() * 2 - 1) * cx,
+					(Utils.random.nextFloat() * 2 - 1) * cy));
+			ant.color=Utils.random.nextInt(Colors.get(1, 1, 1));
+			ants.add(ant);}
+	}
+
 	@Override
 	protected void init() {
 		ants = new ArrayList<Ant>();
-		// for (int i = 0; i < pl; i++)
-		for (int i = 0; i < 1; i++)
-			ants.add(new Ant(new Vector2D((Utils.random.nextFloat() * 2 - 1) * cx,
-					(Utils.random.nextFloat() * 2 - 1) * cy)));
+		addant(1);
 		lastMouseMove=new Vector2D(cx,cy);
 	}
 
 	@Override
 	protected void myTick() {
-		if (ants.size() >= pl)
-			ants.remove(0);
-		if (!((mouseHandler.mouseMoved.locationRelativeAbsolute.x==lastMouseMove.x)&&(mouseHandler.mouseMoved.locationRelativeAbsolute.y==lastMouseMove.y))){
+		checkant();
+		/*if (!((mouseHandler.mouseMoved.locationRelativeAbsolute.x==lastMouseMove.x)&&(mouseHandler.mouseMoved.locationRelativeAbsolute.y==lastMouseMove.y))){
 			lastMouseMove=mouseHandler.mouseMoved.locationRelativeAbsolute.clone();
 			ants.add(new Ant(lastMouseMove.clone()));
-		}		
+		}*/
+		addant(1);
 		// ants.get(0).findDest(ants.get(ants.size()-1));
 		/*
 		 * ants.get(0).dest.x = mouseHandler.mouseMoved.x / SCALE - cx;
@@ -51,6 +60,8 @@ public class AntMoveFrame extends CanvasShell {
 			ant.move();
 		}
 	}
+
+	
 
 	@Override
 	protected void myRender() {
