@@ -7,7 +7,7 @@ public class Ant {
 	Vector2D location, velocity, dest;
 	int color = Colors.get(1, 0.5, 0);
 	//float rate = 0.05f;
-	float rate = 0.01f;
+	float rate = 0.1f;
 
 	public Ant(Vector2D location) {
 		this.location = location;

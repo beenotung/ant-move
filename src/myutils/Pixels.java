@@ -74,8 +74,8 @@ public class Pixels {
 	}
 
 	public void convertRelativeAbsolute(Vector2D v, int x, int y) {
-		v.x = (x - canvasShell.cx) + xOffset;
-		v.y = (y - canvasShell.cy) + yOffset;
+		v.x = x / canvasShell.SCALE - canvasShell.cx + xOffset;
+		v.y = y / canvasShell.SCALE - canvasShell.cy + yOffset;
 	}
 
 }
